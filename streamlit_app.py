@@ -32,6 +32,28 @@ def integer_arithmetic():
     if st.button('Divide'):
         st.write("Result: ", num1 / num2 if num2 != 0 else "Cannot divide by zero")
 
+# Modular Arithmetic in Streamlit App
+
+def modular_arithmetic():
+    st.subheader("Modular Arithmetic")
+
+    num1 = st.number_input("Enter first number", format="%d")
+    num2 = st.number_input("Enter second number", format="%d")
+    modulus = st.number_input("Enter modulus", min_value=1, step=1, format="%d")
+
+    if st.button('Add'):
+        st.write("Result: ", (num1 + num2) % modulus)
+    if st.button('Subtract'):
+        st.write("Result: ", (num1 - num2) % modulus)
+    if st.button('Multiply'):
+        st.write("Result: ", (num1 * num2) % modulus)
+    if st.button('Modular Inverse'):
+        try:
+            inverse = pow(num2, -1, modulus)
+            st.write("Modular Inverse: ", inverse)
+        except ValueError:
+            st.write("Modular Inverse does not exist")
+
 # Main function to run the app
 def main():
     st.title("Cryptography Concepts Explorer")
@@ -40,6 +62,7 @@ def main():
     integer_arithmetic()
 
     # Other sections will be added here
+    modular_arithmetic()
 
 if __name__ == "__main__":
     main()

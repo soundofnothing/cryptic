@@ -1,33 +1,33 @@
-
-# Integer Arithmetic Section in Streamlit App
 import streamlit as st
 
-# TODO - variadic bases (convert numbers between bases and see results of addition and multiplication)
-def integer_arithmetic():
-    st.subheader("Integer Arithmetic")
+def integer_arithmetic_page():
+    st.title("Integer Arithmetic Explorer")
+    st.write("Explore basic arithmetic operations with integers. Input two numbers and select an operation to see the result.")
 
-    # Input fields for two integers
-    num1 = st.number_input("Enter first large integer", format="%d")
-    num2 = st.number_input("Enter second large integer", format="%d")
+    with st.form("arithmetic_form"):
+        num1 = st.number_input("Enter the first integer", value=0, key='num1')
+        num2 = st.number_input("Enter the second integer", value=0, key='num2')
+        operation = st.selectbox("Choose an operation", ["Add", "Subtract", "Multiply", "Divide"], key='operation')
+        submit_button = st.form_submit_button("Calculate")
 
-    # Operation buttons
-    if st.button('Add'):
-        st.write("Result: ", num1 + num2)
-    if st.button('Subtract'):
-        st.write("Result: ", num1 - num2)
-    if st.button('Multiply'):
-        st.write("Result: ", num1 * num2)
-    if st.button('Divide'):
-        st.write("Result: ", num1 / num2 if num2 != 0 else "Cannot divide by zero")
+        if submit_button:
+            result = None
+            if operation == "Add":
+                result = num1 + num2
+            elif operation == "Subtract":
+                result = num1 - num2
+            elif operation == "Multiply":
+                result = num1 * num2
+            elif operation == "Divide":
+                if num2 != 0:
+                    result = num1 / num2
+                else:
+                    st.error("Cannot divide by zero.")
 
+            if result is not None:
+                st.write(f"Result: {result}")
 
-# Main function to run the app
-def main():
-    st.title("Cryptography Concepts Explorer")
-    
-    # Integer Arithmetic Section
-    integer_arithmetic()
+    # Additional sections for advanced operations can be added here
 
-
-if __name__ == "__main__":
-    main()
+# Assuming this function is called in your main app file
+integer_arithmetic_page()

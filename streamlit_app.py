@@ -37,8 +37,8 @@ def integer_arithmetic():
 def modular_arithmetic():
     st.subheader("Modular Arithmetic")
 
-    num1 = st.number_input("Enter first number", format="%d")
-    num2 = st.number_input("Enter second number", format="%d")
+    num1 = st.number_input("Enter first number", format="%d", key='mod1')
+    num2 = st.number_input("Enter second number", format="%d", key='mod2')
     modulus = st.number_input("Enter modulus", min_value=1, step=1, format="%d")
 
     if st.button('Add'):

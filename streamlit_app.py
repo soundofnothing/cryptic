@@ -14,6 +14,7 @@
 # Integer Arithmetic Section in Streamlit App
 import streamlit as st
 
+# TODO - variadic bases (convert numbers between bases and see results of addition and multiplication)
 def integer_arithmetic():
     st.subheader("Integer Arithmetic")
 

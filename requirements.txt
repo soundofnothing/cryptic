@@ -5,3 +5,4 @@ networkx
 cryptography
 matplotlib
 streamlit
+manim

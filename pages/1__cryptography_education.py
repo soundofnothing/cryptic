@@ -13,8 +13,8 @@ def integer_arithmetic_calculator():
     base = st.selectbox("Select Base for Calculation", [10, 2, 8, 16], index=0)  # Default to base 10
 
     if st.button("Calculate"):
-        results = perform_arithmetic_operations(num1, num2, base)
-        st.table(results)
+        #results = perform_arithmetic_operations(num1, num2, base)
+        st.table(perform_arithmetic_operations(num1, num2, base))
 
 def perform_arithmetic_operations(num1, num2, base):
     operations = {

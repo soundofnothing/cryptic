@@ -22,13 +22,18 @@ def integer_arithmetic_calculator():
         num2 = st.number_input("Enter second integer", value=0, key="num2")
     with col2_base2:
         base_num2 = st.selectbox("Base of second number", [2, 8, 10, 16], index=2, key="base_num2")
-    
-    # Base selection for the result
-    result_base = st.selectbox("Select Base for Result", [10, 2, 8, 16], index=0, key="result_base")
-    
-    if st.button("Calculate", key="calculate_arith"):
-        results = perform_arithmetic_operations(num1, num2, base_num1, base_num2, result_base)
-        st.table(results)
+
+    col1_button, col2_dropdown = st.columnns(2)
+
+    # Create two columns for the second number and its base selection
+    with col1_button:
+        # Base selection for the result
+        result_base = st.selectbox("Select Base for Result", [10, 2, 8, 16], index=0, key="result_base")
+
+    with col2_dropdown:
+        if st.button("Calculate", key="calculate_arith"):
+            results = perform_arithmetic_operations(num1, num2, base_num1, base_num2, result_base)
+            st.table(results)
 
 
 

@@ -150,7 +150,7 @@ def main():
     # Other topics with similar structure...
     
     # Topic: Digit Polynomial Visualization
-    digit_polynomials_visualization()
+    visualize_digit_polynomials()
     
 if __name__ == "__main__":
     main()

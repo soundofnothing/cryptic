@@ -8,12 +8,10 @@ import matplotlib.pyplot as plt
 
 def integer_arithmetic_calculator():
     st.subheader("Integer Arithmetic Calculator")
-    num1 = st.number_input("Enter first integer", value=0)
-    num2 = st.number_input("Enter second integer", value=0)
-    base = st.selectbox("Select Base for Calculation", [10, 2, 8, 16], index=0)  # Default to base 10
-
-    if st.button("Calculate"):
-        #results = perform_arithmetic_operations(num1, num2, base)
+    num1 = st.number_input("Enter first integer", value=0, key="num1_int_arith")
+    num2 = st.number_input("Enter second integer", value=0, key="num2_int_arith")
+    base = st.selectbox("Select Base for Calculation", [10, 2, 8, 16], index=0, key="base_int_arith")
+    if st.button("Calculate", key="calculate_int_arith"):
         st.table(perform_arithmetic_operations(num1, num2, base))
 
 def perform_arithmetic_operations(num1, num2, base):

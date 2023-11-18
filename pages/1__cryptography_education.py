@@ -52,6 +52,31 @@ def visualize_digit_polynomials(number, base):
     # Display using Streamlit
     st.pyplot(plt)
 
+def change_of_base_calculator():
+    """Calculator for changing the base of a number."""
+    st.subheader("Change of Base Calculator")
+
+    # User inputs for number and bases
+    number_input = st.number_input("Enter the number", min_value=0, value=0, format='%d')
+    from_base = st.selectbox("From Base", options=[2, 8, 10, 16], index=2)
+    to_base = st.selectbox("To Base", options=[2, 8, 10, 16], index=0)
+
+    if st.button("Convert"):
+        converted_number = convert_base(number_input, from_base, to_base)
+        st.write(f"{number_input} in base {from_base} is {converted_number} in base {to_base}")
+
+def convert_base(number, from_base, to_base):
+    """Converts a number from one base to another."""
+    if from_base != 10:
+        # Convert from the original base to base 10
+        number = int(str(number), from_base)
+    if to_base == 10:
+        return number
+    else:
+        # Convert from base 10 to the new base
+        return np.base_repr(number, base=to_base)
+
+
 # Topic 2: Prime Numbers
 
 def prime_number_checker():

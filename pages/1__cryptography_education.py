@@ -125,8 +125,23 @@ def sieve_of_eratosthenes_visualization():
 # Topic 3: Modular Arithmetic
 
 def modular_arithmetic_calculator():
-    """Placeholder for the Modular Arithmetic Calculators"""
-    pass
+    st.subheader("Modular Arithmetic Calculator")
+    num1 = st.number_input("Enter first number", value=0)
+    num2 = st.number_input("Enter second number", value=0)
+    modulus = st.number_input("Enter modulus", value=1, min_value=1)
+
+    if st.button("Calculate"):
+        mod_results = perform_modular_arithmetic(num1, num2, modulus)
+        st.table(mod_results)
+
+def perform_modular_arithmetic(num1, num2, modulus):
+    mod_operations = {
+        f"({num1} + {num2}) mod {modulus}": (num1 + num2) % modulus,
+        f"({num1} - {num2}) mod {modulus}": (num1 - num2) % modulus,
+        f"({num1} * {num2}) mod {modulus}": (num1 * num2) % modulus,
+        f"({num1} ^ {num2}) mod {modulus}": pow(num1, num2, modulus)
+    }
+    return mod_operations
 
 # Topic 4: Greatest Common Divisor and Euclidean Algorithm
 

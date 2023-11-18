@@ -26,11 +26,11 @@ def integer_arithmetic_calculator():
     col1_button, col2_dropdown = st.columns(2)
 
     # Create two columns for the second number and its base selection
-    with col1_button:
+    with col2_dropdown:
         # Base selection for the result
         result_base = st.selectbox("Select Base for Result", [10, 2, 8, 16], index=0, key="result_base")
 
-    with col2_dropdown:
+    with col1_button:
         if st.button("Calculate", key="calculate_arith"):
             results = perform_arithmetic_operations(num1, num2, base_num1, base_num2, result_base)
             st.table(results)

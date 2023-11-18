@@ -50,6 +50,7 @@ def digit_polynomials_calculator():
     if st.button("Visualize"):
         visualize_digit_polynomials(number, base)
 
+
 def visualize_digit_polynomials(number, base):
     """Converts a number to its digit polynomial representation and plots it."""
     # Convert the number to the specified base
@@ -107,20 +108,51 @@ def convert_base(number, from_base, to_base):
 # Topic 2: Prime Numbers
 
 def prime_number_checker():
-    """Placeholder for the Prime Number Checker"""
-    pass
+    st.subheader("Prime Number Checker")
+    number = st.number_input("Enter a number", min_value=1, value=2)
+    if st.button("Check Prime"):
+        if sympy.isprime(number):
+            st.success(f"{number} is a prime number.")
+        else:
+            st.error(f"{number} is not a prime number.")
+
 
 def prime_factorization_calculator():
-    """Placeholder for the Prime Factorization Calculator"""
-    pass
+    st.subheader("Prime Factorization Calculator")
+    number = st.number_input("Enter a number for factorization", min_value=1, value=2)
+    if st.button("Factorize"):
+        factors = sympy.factorint(number)
+        st.write(f"Prime factors of {number}: {dict(factors)}")
+
 
 def prime_number_generator():
-    """Placeholder for the Prime Number Generator"""
-    pass
+    st.subheader("Prime Number Generator")
+    start = st.number_input("Enter start of range", min_value=0, value=0)
+    end = st.number_input("Enter end of range", min_value=0, value=10)
+    if st.button("Generate Primes"):
+        primes = list(sympy.primerange(start, end))
+        st.write(f"Prime numbers between {start} and {end}: {primes}")
+
 
 def sieve_of_eratosthenes_visualization():
-    """Placeholder for Sieve of Eratosthenes Visualization"""
-    pass
+    st.subheader("Sieve of Eratosthenes Visualization")
+    limit = st.number_input("Enter a limit for prime number generation", min_value=10, value=30)
+    if st.button("Visualize Sieve"):
+        primes, sieve = run_sieve_of_eratosthenes(limit)
+        st.write(f"Prime numbers up to {limit}: {primes}")
+        # Visualization logic to be implemented
+
+def run_sieve_of_eratosthenes(limit):
+    sieve = [True] * (limit + 1)
+    sieve[0] = sieve[1] = False
+    primes = []
+    for current in range(2, limit + 1):
+        if sieve[current]:
+            primes.append(current)
+            for multiple in range(current * 2, limit + 1, current):
+                sieve[multiple] = False
+    return primes, sieve
+
 
 # Topic 3: Modular Arithmetic
 
@@ -188,6 +220,9 @@ def main():
         integer_arithmetic_calculator()
         change_of_base_calculator()
         digit_polynomials_calculator()
+        prime_number_generator()
+        sieve_of_eratosthenes_visualization()
+        modular_arithmetic_calculator()
 
     # Other topics with similar structure...
     

@@ -9,13 +9,19 @@ import matplotlib.pyplot as plt
 def integer_arithmetic_calculator():
     st.subheader("Integer Arithmetic Calculator")
     
-    # Input number 1 with base selection
-    num1 = st.number_input("Enter first integer", value=0, key="num1")
-    base_num1 = st.selectbox("Base of first number", [2, 8, 10, 16], index=2, key="base_num1")
+    # Create two columns for the first number and its base selection
+    col1_num1, col2_base1 = st.columns(2)
+    with col1_num1:
+        num1 = st.number_input("Enter first integer", value=0, key="num1")
+    with col2_base1:
+        base_num1 = st.selectbox("Base of first number", [2, 8, 10, 16], index=2, key="base_num1")
     
-    # Input number 2 with base selection
-    num2 = st.number_input("Enter second integer", value=0, key="num2")
-    base_num2 = st.selectbox("Base of second number", [2, 8, 10, 16], index=2, key="base_num2")
+    # Create two columns for the second number and its base selection
+    col1_num2, col2_base2 = st.columns(2)
+    with col1_num2:
+        num2 = st.number_input("Enter second integer", value=0, key="num2")
+    with col2_base2:
+        base_num2 = st.selectbox("Base of second number", [2, 8, 10, 16], index=2, key="base_num2")
     
     # Base selection for the result
     result_base = st.selectbox("Select Base for Result", [10, 2, 8, 16], index=0, key="result_base")
@@ -23,6 +29,7 @@ def integer_arithmetic_calculator():
     if st.button("Calculate", key="calculate_arith"):
         results = perform_arithmetic_operations(num1, num2, base_num1, base_num2, result_base)
         st.table(results)
+
 
 
 def perform_arithmetic_operations(num1, num2, base_num1, base_num2, result_base):

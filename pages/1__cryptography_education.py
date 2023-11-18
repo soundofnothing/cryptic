@@ -25,8 +25,32 @@ def digit_polynomials_calculator():
 
 def visualize_digit_polynomials(number, base):
     """Converts a number to its digit polynomial representation and plots it."""
-    # Placeholder for the conversion and plotting logic
-    pass
+    # Convert the number to the specified base
+    if base == 10:
+        digits = [int(d) for d in str(number)]
+    else:
+        digits = np.base_repr(number, base=base)
+        digits = [int(d, base=base) for d in digits[::-1]]  # Reverse for correct order
+
+    # Polynomial representation
+    polynomial = np.poly1d(digits[::-1])  # Reverse again for poly1d representation
+
+    # Create x and y values for plotting
+    x = np.linspace(-base, base, 400)
+    y = polynomial(x)
+
+    # Plotting
+    plt.figure(figsize=(10, 6))
+    plt.plot(x, y, label=f"Base {base} Polynomial of {number}")
+    plt.title(f"Digit Polynomial Representation of {number} in Base {base}")
+    plt.xlabel("x")
+    plt.ylabel("Polynomial Value")
+    plt.grid(True)
+    plt.legend()
+    plt.show()
+
+    # Display using Streamlit
+    st.pyplot(plt)
 
 # Topic 2: Prime Numbers
 

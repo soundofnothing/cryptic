@@ -23,7 +23,7 @@ def integer_arithmetic_calculator():
     with col2_base2:
         base_num2 = st.selectbox("Base of second number", [2, 8, 10, 16], index=2, key="base_num2")
 
-    col1_button, col2_dropdown = st.columnns(2)
+    col1_button, col2_dropdown = st.columns(2)
 
     # Create two columns for the second number and its base selection
     with col1_button:

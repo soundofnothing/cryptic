@@ -149,8 +149,5 @@ def main():
 
     # Other topics with similar structure...
     
-    # Topic: Digit Polynomial Visualization
-    visualize_digit_polynomials()
-    
 if __name__ == "__main__":
     main()

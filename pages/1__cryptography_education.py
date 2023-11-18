@@ -7,8 +7,35 @@ import matplotlib.pyplot as plt
 # Topic 1: Integer Arithmetic
 
 def integer_arithmetic_calculator():
-    """Placeholder for the Integer Arithmetic Calculator"""
-    pass
+    st.subheader("Integer Arithmetic Calculator")
+    num1 = st.number_input("Enter first integer", value=0)
+    num2 = st.number_input("Enter second integer", value=0)
+    base = st.selectbox("Select Base for Calculation", [10, 2, 8, 16], index=0)  # Default to base 10
+
+    if st.button("Calculate"):
+        results = perform_arithmetic_operations(num1, num2, base)
+        st.table(results)
+
+def perform_arithmetic_operations(num1, num2, base):
+    operations = {
+        f"{num1} + {num2}": num1 + num2,
+        f"{num1} - {num2}": num1 - num2,
+        f"{num1} * {num2}": num1 * num2,
+        f"{num1} / {num2}" if num2 != 0 else "Division by Zero": "Error" if num2 == 0 else num1 / num2
+    }
+
+
+    def convert_to_base(number, base):
+        if base == 10:
+            return number
+        else:
+            return np.base_repr(int(number), base=base)
+
+    # Convert results to the selected base
+    converted_operations = {op: convert_to_base(val, base) if val != "Error" else "Error" for op, val in operations.items()}
+    
+    return converted_operations
+
 
 def digit_polynomials_calculator():
     """Visualizes a number as digit polynomials for different bases."""

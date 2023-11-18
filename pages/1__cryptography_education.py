@@ -8,32 +8,63 @@ import matplotlib.pyplot as plt
 
 def integer_arithmetic_calculator():
     st.subheader("Integer Arithmetic Calculator")
-    num1 = st.number_input("Enter first integer", value=0, key="num1_int_arith")
-    num2 = st.number_input("Enter second integer", value=0, key="num2_int_arith")
-    base = st.selectbox("Select Base for Calculation", [10, 2, 8, 16], index=0, key="base_int_arith")
-    if st.button("Calculate", key="calculate_int_arith"):
-        st.table(perform_arithmetic_operations(num1, num2, base))
+    
+    # Input number 1 with base selection
+    num1 = st.number_input("Enter first integer", value=0, key="num1")
+    base_num1 = st.selectbox("Base of first number", [2, 8, 10, 16], index=2, key="base_num1")
+    
+    # Input number 2 with base selection
+    num2 = st.number_input("Enter second integer", value=0, key="num2")
+    base_num2 = st.selectbox("Base of second number", [2, 8, 10, 16], index=2, key="base_num2")
+    
+    # Base selection for the result
+    result_base = st.selectbox("Select Base for Result", [10, 2, 8, 16], index=0, key="result_base")
+    
+    if st.button("Calculate", key="calculate_arith"):
+        results = perform_arithmetic_operations(num1, num2, base_num1, base_num2, result_base)
+        st.table(results)
 
-def perform_arithmetic_operations(num1, num2, base):
-    operations = {
-        f"{num1} + {num2}": num1 + num2,
-        f"{num1} - {num2}": num1 - num2,
-        f"{num1} * {num2}": num1 * num2,
-        f"{num1} / {num2}" if num2 != 0 else "Division by Zero": "Error" if num2 == 0 else num1 / num2
+
+def perform_arithmetic_operations(num1, num2, base_num1, base_num2, result_base):
+    # Convert inputs to base 10 for calculation
+    num1_base10 = convert_base(num1, base_num1, 10)
+    num2_base10 = convert_base(num2, base_num2, 10)
+    
+    # Perform operations in base 10
+    operations_base10 = {
+        "Addition": int(num1_base10) + int(num2_base10),
+        "Subtraction": int(num1_base10) - int(num2_base10),
+        "Multiplication": int(num1_base10) * int(num2_base10),
+        "Division": "Error" if int(num2_base10) == 0 else int(num1_base10) / int(num2_base10)
     }
 
+    # Convert results to the selected result base
+    operations_result_base = {op: convert_base(val, 10, result_base) if val != "Error" else "Error" 
+                              for op, val in operations_base10.items()}
 
-    def convert_to_base(number, base):
-        if base == 10:
-            return number
-        else:
-            return np.base_repr(int(number), base=base)
-
-    # Convert results to the selected base
-    converted_operations = {op: convert_to_base(val, base) if val != "Error" else "Error" for op, val in operations.items()}
+    # Create a table with the results
+    result_table = {f"{num1} (base {base_num1}) {operation} {num2} (base {base_num2})": result
+                    for operation, result in operations_result_base.items()}
     
-    return converted_operations
+    return result_table
 
+
+def convert_base(number, from_base, to_base):
+    """Converts a number from one base to another, handling the division case."""
+    # Convert from the original base to base 10 if necessary
+    number_base10 = int(str(number), from_base) if from_base != 10 else number
+
+    # If the target base is 10, return the number directly
+    if to_base == 10:
+        return str(number_base10)
+    
+    # For non-decimal bases, convert number to integer if it is a float
+    if isinstance(number_base10, float):
+        number_base10 = int(number_base10)
+
+    # Convert from base 10 to the new base
+    return np.base_repr(number_base10, base=to_base)
+    
 
 def digit_polynomials_calculator():
     """Visualizes a number as digit polynomials for different bases."""
@@ -78,6 +109,7 @@ def visualize_digit_polynomials(number, base):
     # Display using Streamlit
     st.pyplot(plt)
 
+
 def change_of_base_calculator():
     """Calculator for changing the base of a number."""
     st.subheader("Change of Base Calculator")
@@ -90,18 +122,6 @@ def change_of_base_calculator():
     if st.button("Convert"):
         converted_number = convert_base(number_input, from_base, to_base)
         st.write(f"{number_input} in base {from_base} is {converted_number} in base {to_base}")
-
-def convert_base(number, from_base, to_base):
-    """Converts a number from one base to another."""
-    if from_base != 10:
-        # Convert from the original base to base 10
-        number = int(str(number), from_base)
-    if to_base == 10:
-        return number
-    else:
-        # Convert from base 10 to the new base
-        return np.base_repr(number, base=to_base)
-
 
 # Topic 2: Prime Numbers
 

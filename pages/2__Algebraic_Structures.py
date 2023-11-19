@@ -1,66 +1,86 @@
 import streamlit as st
 
-def introduction_to_groups():
-    """Interactive introduction to Groups."""
-    # Content and interactive widgets go here
+# Utilities and imports for calculations go here
+# ...
+
+def intro_to_group_theory():
+    """Display introduction and theory about Groups."""
     pass
 
 def group_operations_calculator():
-    """Group operations table generator."""
-    # Content and interactive widgets go here
+    """Calculator for Group operations."""
     pass
 
-def introduction_to_rings():
-    """Interactive introduction to Rings."""
-    # Content and interactive widgets go here
+def subgroup_checker():
+    """Check if a subset is a subgroup of a group."""
+    pass
+
+def intro_to_ring_field_theory():
+    """Display introduction and theory about Rings and Fields."""
     pass
 
 def ring_operations_calculator():
-    """Ring operations table generator."""
-    # Content and interactive widgets go here
-    pass
-
-def introduction_to_fields():
-    """Interactive introduction to Fields."""
-    # Content and interactive widgets go here
+    """Calculator for Ring operations."""
     pass
 
 def field_operations_calculator():
-    """Field operations table generator."""
-    # Content and interactive widgets go here
+    """Calculator for Field operations."""
     pass
 
-def finite_fields_and_galois_theory():
-    """Introduction to Finite Fields and Galois Theory."""
-    # Content and interactive widgets go here
+def intro_to_finite_fields_galois():
+    """Display introduction and theory about Finite Fields and Galois Theory."""
     pass
 
-def introduction_to_elliptic_curves():
-    """Interactive introduction to Elliptic Curves."""
-    # Content and interactive widgets go here
+def finite_field_arithmetic_calculator():
+    """Calculator for arithmetic in Finite Fields."""
     pass
 
-def elliptic_curve_calculator():
-    """Elliptic curve point addition calculator."""
-    # Content and interactive widgets go here
+def galois_field_construction():
+    """Tool for constructing Galois Fields."""
     pass
 
+def intro_to_elliptic_curves():
+    """Display introduction and theory about Elliptic Curves."""
+    pass
+
+def elliptic_curve_point_addition_calculator():
+    """Calculator for point addition on Elliptic Curves."""
+    pass
+
+def elliptic_curve_scalar_multiplication():
+    """Calculator for scalar multiplication on Elliptic Curves."""
+    pass
+
+def elliptic_curve_visualizer():
+    """Visualization tool for Elliptic Curves."""
+    pass
+
+# Streamlit layout and navigation
 def main():
     st.title("Module 2: Algebraic Structures")
-
-    # Example of navigation within Module 2
-    topic = st.sidebar.selectbox(
-        "Choose a topic within Algebraic Structures",
-        ["Groups", "Rings", "Fields", "Finite Fields and Galois Theory", "Elliptic Curves"]
-    )
-
-    if topic == "Groups":
-        introduction_to_groups()
+    
+    topic = st.sidebar.selectbox("Choose a topic", [
+        "Groups, Rings, and Fields", 
+        "Finite Fields and Galois Theory", 
+        "Elliptic Curves"
+    ])
+    
+    if topic == "Groups, Rings, and Fields":
+        intro_to_group_theory()
         group_operations_calculator()
-    elif topic == "Rings":
-        introduction_to_rings()
+        subgroup_checker()
+        intro_to_ring_field_theory()
         ring_operations_calculator()
-    # ... and so on for each topic
+        field_operations_calculator()
+    elif topic == "Finite Fields and Galois Theory":
+        intro_to_finite_fields_galois()
+        finite_field_arithmetic_calculator()
+        galois_field_construction()
+    elif topic == "Elliptic Curves":
+        intro_to_elliptic_curves()
+        elliptic_curve_point_addition_calculator()
+        elliptic_curve_scalar_multiplication()
+        elliptic_curve_visualizer()
 
 if __name__ == "__main__":
     main()

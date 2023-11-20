@@ -6,13 +6,17 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
-
-# Additional imports for cryptographic functions will go here
+import matplotlib.pyplot as plt
 
 # Utility functions for cryptographic operations
 def generate_hash(message, hash_algorithm):
     """Generate a hash for a given message using the specified algorithm."""
-    return hash_algorithm(message)
+    if hash_algorithm == "SHA256":
+        return hashlib.sha256(message.encode()).hexdigest()
+    elif hash_algorithm == "MD5":
+        return hashlib.md5(message.encode()).hexdigest()
+    elif hash_algorithm == "SHA1":
+        return hashlib.sha1(message.encode()).hexdigest()
 
 def find_hash_collision(hash_algorithm):
     """Find two different messages that produce the same hash value."""
@@ -46,7 +50,6 @@ def visualize_hashing_process(message, hash_algorithm):
     st.write(f"Modified Message: {modified_message}")
     st.write(f"Modified Hash: {hash_modified}")
 
-
 # Streamlit interactive elements and layout for each topic
 def hash_functions_intro():
     st.subheader("Introduction to Hash Functions")
@@ -56,7 +59,6 @@ def hash_functions_intro():
     Common uses include data integrity checks and password storage.
     """)
 
-
 def hash_function_calculator():
     st.subheader("Hash Function Calculator")
     message = st.text_area("Enter your message here")
@@ -65,29 +67,19 @@ def hash_function_calculator():
         hash_value = generate_hash(message, hash_algorithm)
         st.write("Hash Value:", hash_value)
 
-def generate_hash(message, hash_algorithm):
-    if hash_algorithm == "SHA256":
-        return hashlib.sha256(message.encode()).hexdigest()
-    elif hash_algorithm == "MD5":
-        return hashlib.md5(message.encode()).hexdigest()
-    elif hash_algorithm == "SHA1":
-        return hashlib.sha1(message.encode()).hexdigest()
-
 def collision_finder_calculator():
     st.subheader("Collision Finder")
     hash_algorithm = st.selectbox("Select Hash Algorithm for Collision Finding", ["MD5", "SHA1"])
-    # Collision finding is a complex process and often requires considerable computational resources.
     st.write("Note: Finding collisions is computationally intensive and not typically done in real-time.")
-    # Placeholder for collision finder logic
+    if st.button("Find Collision"):
+        find_hash_collision(hash_algorithm)
 
 def hash_function_visualization():
     st.subheader("Hash Function Process Visualization")
     message = st.text_area("Enter your message to visualize hashing", "Hello World")
     hash_algorithm = st.selectbox("Select Hash Algorithm for Visualization", ["SHA256", "MD5", "SHA1"])
-    # Placeholder for hash visualization logic (potentially using matplotlib or plotly)
-
-
-# Similar functions for other topics...
+    if st.button("Visualize Hash"):
+        visualize_hashing_process(message, hash_algorithm)
 
 # Main function to control the Streamlit app layout
 def main():
